@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+    {% block content %}
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 p-3 d-flex justisfy-content-center">
+            <form action="" method="post" class="form w-50" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="my-3">
+                    <input type="text" name="task" placeholder="Task" class="form-control">
+                </div>
+                <div>
+                    <input type="number" name="priority" placeholder="priority" class="form-control">
+                </div>
+                <div>
+                    <input type="date" name="date" placeholder="Date" class="form-control my-3">
+                </div>
+                <div>
+                    <input type="file" name="image" placeholder="image" class="form-control my-3">
+                </div>
+                <div class="my-3 text-center">
+                    <button class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 p-3 hdn">
+            <h1>Task to be completed</h1>
+            <div class="container bttn">
+                {% for task in tasks %}
+                <div class="tasks d-flex justify-content-between flex-wrap border p-3 m-2 ">
+                    <div class="child"><img src="{{task.image.url}}" alt="{{task.name}}"></div>
+                    <div class="child">{{task.task}}</div>
+                    <div class="child">
+                        <a href="{% url 'update' task.id %}" class="btn btn-primary">update</a>
+                        <a href="{% url 'delete' task.id %}" class="btn btn-success">done</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+ 
+{% endblock %}    
